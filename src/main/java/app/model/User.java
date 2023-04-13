@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "MyUsers")
+@Table(name = "users")
 public class User {
     @Id
     @Column(name = "id")
@@ -23,7 +23,7 @@ public class User {
     @Column(name = "lastName")
     private String lastName;
 
-    @NotEmpty(message = "Age should not be empty")
+
     @Min(value = 0, message = "Age should be greater than 0")
     @Column(name = "age")
     private int age;
