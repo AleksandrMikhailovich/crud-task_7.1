@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Users List</title>
@@ -7,8 +7,7 @@
 <body>
 <div>
     <th:block th:each="user : ${users}">
-        <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()}"
-           th:text="${user.getLastName()}" th:text="${user.getAge()}">user</a><br>
+        <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()}" th:text="${user.getLastName()}" th:text="${user.getAge()}">user</a><br>
     </th:block>
 </div>
 
