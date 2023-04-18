@@ -62,6 +62,11 @@ public class MyConfiguration implements WebMvcConfigurer {
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
+    private HibernateJpaVendorAdapter vendorAdapter() {
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setShowSql(true);
+        return vendorAdapter;
+    }
 
     @Bean
     public DataSource dataSource(){  //источник данных, нужен для jdbc template чтобы указать на нашу БД
@@ -77,7 +82,7 @@ public class MyConfiguration implements WebMvcConfigurer {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        //properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
 
         return properties;
     }

@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.model.User;
+import app.repository.UserRepository;
 import app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,22 +14,22 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {  // получим по id
-        model.addAttribute("user", userService.findOne(id));
+        model.addAttribute("user", userRepository.findOne(id));
         return "show";
     }
 
-    @GetMapping("")
+    @GetMapping()
     public String users(Model model) {
-        model.addAttribute("users", userService.findAll());
+        model.addAttribute("users", userRepository.findAll());
         return "users";
     }
 
@@ -43,13 +44,13 @@ public class UserController {
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())               //проверяем на валидацию
             return "new";
-        userService.save(user);
+        userRepository.save(user);
         return "redirect:/users"; //при добавлении возвращает нас на главную страницу со списком
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("user", userService.findOne(id));
+        model.addAttribute("user", userRepository.findOne(id));
         return "edit";
     }
 
@@ -59,13 +60,13 @@ public class UserController {
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())     //проверяем на валидацию
             return "edit";
-        userService.update(id, user);
+        userRepository.update(id, user);
         return "redirect:/users";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") int id) {
-        userService.delete(id);
+        userRepository.delete(id);
 
         return "redirect:/users";
     }
