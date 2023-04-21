@@ -29,7 +29,7 @@ import java.util.Properties;
 @ComponentScan("app")
 @PropertySource("classpath:hibernate.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories("app.repository")
+@EnableJpaRepositories("app.dao")
 public class MyConfiguration implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
     private final Environment environment;

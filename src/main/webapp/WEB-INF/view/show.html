@@ -5,10 +5,10 @@
     <title>user by id</title>
 </head>
 <body>
-<p th:text="${user.getId()}">VALUE</p>
-<p th:text="${user.getName()()}">VALUE</p>
-<p th:text="${user.getLastName()()}">VALUE</p>
-<p th:text="${user.getAge()()}">VALUE</p>
+<p th:text="${user.getId()}">text</p>
+<p th:text="${user.getName()}">text</p>
+<p th:text="${user.getLastName()}">text</p>
+<p th:text="${user.getAge()}">text</p>
 <br/>
 <hr/>
 
@@ -17,7 +17,7 @@
 <hr/>
 
 <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
-  <input th:type="submit" value="Delete">
+    <input th:type="submit" value="Delete">
 </form>
 
 </body>
